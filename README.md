@@ -36,3 +36,5 @@ react-tilt: анимация при наведении курсора мыши. 
 7 - npm i @emailjs/browser (браузер электронной почты)
 8 - npm i framer-motion (движение кадра)
 9 - npm i react-router-dom  (маршрутизация) 
+10 - npm i --legacy-peer-deps -D tailwindcss postcss autoprefixer
+11 - npx tailwindcss init -p 
