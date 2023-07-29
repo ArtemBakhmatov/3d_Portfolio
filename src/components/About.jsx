@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { services } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
+import { fadeIn, textVariant, staggerContainer } from "../utils/motion";
 
 // eslint-disable-next-line react/prop-types
 const ServiceCard = ({ index, title, icon }) => {
@@ -37,26 +37,34 @@ const ServiceCard = ({ index, title, icon }) => {
 const About = () => {
 	return (
 		<>
-			<motion.div variants={ textVariant() }>
-				<p className={ styles.sectionSubText }>Introduction</p>
-				<h2 className={ styles.sectionHeadText }>Overview.</h2>
-			</motion.div>
-			<motion.p 
-				variants={ fadeIn('', '', 0.1, 1) }
-				className="mt-4 text-secondary text-[17px] max-w-3x1 leading-[30px]"
+			<motion.section
+				variants={ staggerContainer() } 
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.25}}
+                className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
 			>
-				I&rsquo;m a&nbsp;skilled software developer with experience in&nbsp;TypeScript and
-				JavaScript, and expertise in&nbsp;frameworks like React, Node.js, and
-				Three.js. I&rsquo;m a&nbsp;quick learner and collaborate closely with clients to
-				create efficient, scalable, and user-friendly solutions that solve
-				real-world problems. Let&rsquo;s work together to&nbsp;bring your ideas to&nbsp;life!
-			</motion.p>
+				<motion.div variants={ textVariant() }>
+					<p className={ styles.sectionSubText }>Introduction</p>
+					<h2 className={ styles.sectionHeadText }>Overview.</h2>
+				</motion.div>
+				<motion.p 
+					variants={ fadeIn('', '', 0.1, 1) }
+					className="mt-4 text-secondary text-[17px] max-w-3x1 leading-[30px]"
+				>
+					I&rsquo;m a&nbsp;skilled software developer with experience in&nbsp;TypeScript and
+					JavaScript, and expertise in&nbsp;frameworks like React, Node.js, and
+					Three.js. I&rsquo;m a&nbsp;quick learner and collaborate closely with clients to
+					create efficient, scalable, and user-friendly solutions that solve
+					real-world problems. Let&rsquo;s work together to&nbsp;bring your ideas to&nbsp;life!
+				</motion.p>
 
-			<div className="mt-20 flex flex-wrap gap-10">
-				{ services.map((service, index) => 
-					<ServiceCard key={ service.title} index={ index } {...service} />
-				)}
-			</div>
+				<div className="mt-20 flex flex-wrap justify-center gap-10">
+					{ services.map((service, index) => 
+						<ServiceCard key={ service.title} index={ index } {...service} />
+					)}
+				</div>
+			</motion.section>
 		</>
 	);
 };
