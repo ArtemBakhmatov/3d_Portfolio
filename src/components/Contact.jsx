@@ -16,11 +16,41 @@ const Contact = () => {
 	const [loading, setLoading] = useState(false);
 
 	const handleChange = (e) => {
-
+		const { name, value } = e.target;
+		setForm({ ...form, [name]: value });
 	}
 
 	const handleSubmit = (e) => {
+		e.preventDefault();
+		setLoading(true);
 
+		// VW4IIjGtXgIhgJ-Y5 -> Public Key
+		// template_91urr14 -> Email Templates
+		// service_zt3qq0s  -> Email Services
+		emailjs.send(
+			'service_zt3qq0s', 
+			'template_91urr14',
+			{
+				from_name: form.name,
+				to_name: 'Artem',
+				from_email: form.email,
+				to_email: 'ip.bakhmatov@mail.ru',
+				message: form.message
+			},
+			'VW4IIjGtXgIhgJ-Y5'
+		).then(() => {
+			setLoading(false);
+			alert('Thank you, I will get back to you as soon as possible.');
+			setForm({
+				name: '',
+				email: '',
+				message: ''
+			});
+		}, (error) => {
+			setLoading(false);
+			console.log(error);
+			alert('Something went wrong.');
+		});
 	}
 
 	return (
